@@ -7,7 +7,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Log4j
 @Getter
@@ -26,4 +36,25 @@ public class Project {
     private String area;
     @Column(name = "cost")
     private int cost;
+
+    @ManyToMany
+    @JoinTable(name = "dev_project",
+            joinColumns = @JoinColumn(name = "id_developer", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_project", referencedColumnName = "id")
+    )
+    private Set<Developer> developers = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "company_project",
+            joinColumns = @JoinColumn(name = "id_project", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_company", referencedColumnName = "id")
+    )
+    private Set<Company> companies = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "customer_project",
+            joinColumns = @JoinColumn(name = "id_project", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_customer", referencedColumnName = "id")
+    )
+    private Set<Customer> customers = new HashSet<>();
 }
