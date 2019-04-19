@@ -16,8 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Log4j
 @Getter
@@ -29,12 +29,12 @@ import java.util.Set;
 public class Skill extends EntityTable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     @Column(name = "Area")
     private String area;
     @Column(name = "Skill")
     private String skill;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "skills")
-    private Set<Developer> developers = new HashSet<>();
+    private List<Developer> developers = new ArrayList<>();
 }
