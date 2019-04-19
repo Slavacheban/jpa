@@ -1,31 +1,36 @@
 package services;
 
 import entities.Developer;
+import entities.EntityTable;
+import util.UtilEntityManagerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
-public class DeveloperService {
-    public EntityManager em = Persistence.createEntityManagerFactory("MATE-ACADEMY")
-            .createEntityManager();
+public class DeveloperRepository implements Repository {
+    public EntityManager em = UtilEntityManagerFactory.entityManagerFactory.createEntityManager();
 
-    public void add(Developer developer){
+    @Override
+    public void add(EntityTable developer){
         em.getTransaction().begin();
         em.persist(developer);
         em.getTransaction().commit();
     }
 
+    @Override
     public void delete(long id){
         em.getTransaction().begin();
         em.remove(get(id));
         em.getTransaction().commit();
     }
 
+    @Override
     public Developer get(long id){
         return em.find(Developer.class, id);
     }
 
-    public void update(Developer developer){
+    @Override
+    public void update(EntityTable developer){
         em.getTransaction().begin();
         em.merge(developer);
         em.getTransaction().commit();

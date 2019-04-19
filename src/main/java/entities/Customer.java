@@ -25,7 +25,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customers")
-public class Customer {
+public class Customer extends EntityTable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

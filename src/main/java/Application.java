@@ -1,5 +1,5 @@
 import entities.Developer;
-import services.DeveloperService;
+import services.DeveloperRepository;
 
 public class Application {
     public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class Application {
         developer.setName("Vovchik");
         developer.setSalary(500);
 
-        DeveloperService developerService = new DeveloperService();
-        developerService.add(developer);
+        DeveloperRepository developerdeveloperRepository = new DeveloperRepository();
+        developerdeveloperRepository.add(developer);
     }
 }
